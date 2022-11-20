@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Post
 from .serializers import PostSerializers
-from .permissions import IsAuthorOrRead
+# from .permissions import IsAuthorOrRead
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 
 class PostAPIListView(ListCreateAPIView):
