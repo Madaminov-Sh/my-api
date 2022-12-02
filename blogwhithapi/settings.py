@@ -25,15 +25,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'blog',
     'rest_framework',
-    'corsheaders'
+    'drf_yasg',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'dj_rest_auth', 
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
 ]
+
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.corsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -41,14 +51,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000'
     # other localhost
-)
+]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticatedOrReadOnly']
+    'DEFAULT_PERMISSION_CLASSES':
+    ['rest_framework.permissions.AllowAny'],
+
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.TokenAuthentication'
+    ]
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ROOT_URLCONF = 'blogwhithapi.urls'
 
